@@ -5,24 +5,32 @@ let people = [
 	{ name: 'Dylan', birthDate: new Date(1999,12,14) },
 	{ name: 'Steve', birthDate: new Date(2003,4,24) }
 ];
+let dateString = function(person){
+	return person.birthDate;
+};
+let dateStringmap = people.map(dateString)
 
-let param = people.birthDate;
+let getEdad = function(dateStringmap) {
+	let hoy = new Date()
+	let fechaNacimiento = new Date(dateStringmap)
+	let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+	let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
+	for(let i = 0; i < dateString.length; i++){
+	if (
+	  diferenciaMeses < 0 ||
+	  (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
+	) {
+	  edad--
+	}}
+	return edad
+  }
 
-function age(date){
-	let  today = new Date();
-	let birth= new Date(date);
-	let resage= today.getFullYear() - birth.getFullYear();
-	let m = today.getMonth() - birth.getMonth();
+console.log(dateStringmap);
 
-	if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-        resage--;
-    }
 
-    return resage;
-}
 
 let simplifier = function(person){
-	return person.name + age(param);
+	return person.name;
 };
 
 console.log(people.map(simplifier));
